@@ -1,0 +1,76 @@
+/* Fullscreen centered layout */
+.container {
+  background: linear-gradient(to bottom right, #dbe6f6, #c5796d);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Form wrapper with glass effect */
+.registerBox {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  color: #fff;
+}
+
+/* Form title */
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Submit button */
+.button {
+  width: 100%;
+  padding: 14px;
+  background-color: #e74c3c;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background-color: #c0392b;
+}
+
+/* Error messages */
+.error {
+  color: #ffb3b3;
+  font-size: 12px;
+  margin-top: -8px;
+  margin-bottom: 10px;
+}

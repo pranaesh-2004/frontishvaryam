@@ -1,0 +1,249 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  min-height: 80vh;
+}
+
+.filter_tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  scrollbar-width: none;
+}
+
+.filter_tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  background-color: #f5f5f5;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.tab:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.tab.active {
+  background-color: #ff6b6b;
+  color: white;
+  border-color: #ff6b6b;
+}
+
+.orders_list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.order_card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+}
+
+.order_card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.order_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  cursor: pointer;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.order_id {
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+  min-width: 120px;
+}
+
+.order_status {
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.order_status[data-status="pending"] {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.order_status[data-status="completed"] {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.order_status[data-status="cancelled"] {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.order_status[data-status="processing"] {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.order_date {
+  color: #666;
+  font-size: 0.9rem;
+  min-width: 150px;
+}
+
+.order_total {
+  font-weight: 600;
+  color: #222;
+  min-width: 100px;
+}
+
+.expand_icon {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #666;
+  transition: transform 0.3s ease;
+}
+
+.order_card.expanded .expand_icon {
+  transform: rotate(180deg);
+}
+
+.order_details {
+  padding: 0 1.5rem 1.5rem;
+  border-top: 1px solid #eee;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.items_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.item_card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.item_card:hover {
+  background-color: #f9f9f9;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.item_image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.item_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item_name {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.item_quantity {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.item_price {
+  font-weight: 600;
+  color: #ff6b6b;
+  margin-top: 0.25rem;
+}
+
+.order_actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.track_button, .reorder_button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-size: 0.9rem;
+}
+
+.track_button {
+  background-color: #ff6b6b;
+  color: white;
+  text-decoration: none;
+}
+
+.track_button:hover {
+  background-color: #ff5252;
+  transform: translateY(-2px);
+}
+
+.reorder_button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.reorder_button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .order_header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .items_grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .order_actions {
+    justify-content: center;
+  }
+}
