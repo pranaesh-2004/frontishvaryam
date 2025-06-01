@@ -169,15 +169,18 @@ export default function HomePage() {
    
       {/* Main Content */}
       <main className="container-fluid px-3 py-4">
-        <div className="row g-4">
           
           <div className="col-md-4">
+  <div className="categories-section">
   <h4>Categories to explore</h4>
-  <Tags tags={tags} />
+  <div className="tags-container">
+    <Tags tags={tags} />
+  </div>
   <button className="btn btn-dark mt-3" onClick={() => navigate('/')}>
     View All Products
   </button>
 </div>
+
 
          
         </div>
