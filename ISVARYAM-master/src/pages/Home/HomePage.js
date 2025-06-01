@@ -6,7 +6,7 @@ import Thumbnails from '../../components/Thumbnails/Thumbnails';
 import NotFound from '../../components/NotFound/NotFound';
 import { useCart } from '../../hooks/useCart'; // Update the path if needed
 
-import { FaChevronDown } from 'react-icons/fa';
+
 import './HomePage.css';
 import { useAuth } from '../../hooks/useAuth';
 import {
@@ -19,7 +19,7 @@ import {
 import {
   FaInstagram, FaBoxOpen, FaUserCircle, FaHandsHelping,
   FaArrowUp, FaBullhorn, 
-  FaTimes, FaPercent, FaGift, FaRegStar, FaStar
+  FaTimes, FaGift, FaRegStar, FaStar
 } from 'react-icons/fa';
 
 
@@ -62,16 +62,11 @@ export default function HomePage() {
   const [quickViewFood, setQuickViewFood] = useState(null);
   
   // Newsletter
-  const [email, setEmail] = useState('');
+  
   
 
   // Category filter
-  const categories = [
-    { name: 'All', filter: null },
-    { name: 'Oils', filter: 'Oils' },
-    { name: 'Powder', filter: 'Powder' },
-  ];
-  const [selectedCategory, setSelectedCategory] = useState('All');
+ 
   const [selectedTag, setSelectedTag] = useState(null);
 
   useEffect(() => {
