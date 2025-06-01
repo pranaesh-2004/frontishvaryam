@@ -1,133 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;700&display=swap');
+
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-.details {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
   padding: 2rem;
+  background: linear-gradient(to right, #f3fef3, #eaf7ea);
+  font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
 }
 
-.profileHeader {
+/* Sidebar */
+.sidebar {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  min-width: 220px;
+  text-align: center;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
-}
-
-.avatarContainer {
-  position: relative;
-  margin-bottom: 1rem;
 }
 
 .avatar {
-  width: 120px;
-  height: 120px;
+  background: #dff0d8;
+  padding: 12px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #009e84;
+  margin-bottom: 1rem;
+  color: #13ac1a;
 }
 
-.avatarUpload {
+.sidebar h3 {
+  margin-bottom: 0.3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.sidebar p {
+  font-size: 0.85rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Main form container */
+.details {
+  background: #fff;
+  backdrop-filter: blur(6px);
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  width: 100%;
+  max-width: 480px; /* shortened like you asked */
+  font-family: 'Open Sans', sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #1b5e20;
+  font-family: 'Roboto', sans-serif;
+}
+
+.editIcon {
+  color: #4caf50;
+  font-size: 1.6rem;
+}
+
+/* Small button like Amazon */
+button {
+  font-size: 0.85rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  border: none;
+  background-color: #009e84;
+  color: #fff;
+  transition: background-color 0.2s ease;
   cursor: pointer;
-  position: relative;
-  display: inline-block;
 }
 
-.avatarOverlay {
-  position: absolute;
+button:hover {
+  background-color: #027466;
+}
+
+/* Change Password trigger button (icon + text) */
+.changePasswordBtn {
+  margin-top: 1.5rem;
+  background: none;
+  border: none;
+  color: #007185;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.changePasswordBtn:hover {
+  color: #004d5f;
+}
+
+/* Overlay */
+.dialogOverlay {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
-  align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  align-items: center;
+  z-index: 999;
 }
 
-.avatarOverlay span {
-  color: white;
-  font-weight: bold;
-}
-
-.avatarUpload:hover .avatarOverlay {
-  opacity: 1;
-}
-
-.avatarInput {
-  display: none;
-}
-
-.userName {
-  margin: 0;
-  color: #333;
-  font-size: 1.8rem;
-}
-
-.profileForm {
-  margin-top: 2rem;
-}
-
-.formGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.buttonGroup {
+/* Dialog Box */
+.dialogBox {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  width: 90%;
+  max-width: 400px;
+  max-height: 320px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  font-family: 'Open Sans', sans-serif;
+  animation: fadeIn 0.3s ease-in-out;
+  overflow-y: auto;
   display: flex;
-  justify-content: flex-end;
-  margin-top: 1.5rem;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* Mobile Styles */
+/* Dialog Header */
+.dialogTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Input Fields */
+.dialogInput {
+  width: 100%;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: 'Open Sans', sans-serif;
+  transition: border 0.2s ease;
+}
+
+.dialogInput:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Buttons */
+.dialogActions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.dialogButton {
+  flex: 1;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.saveBtn {
+  background-color: #009e84;
+  color: white;
+}
+
+.saveBtn:hover {
+  background-color: #027466;
+}
+
+.cancelBtn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.cancelBtn:hover {
+  background-color: #ccc;
+}
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive layout */
 @media (max-width: 768px) {
   .container {
-    padding: 1rem 0.5rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: static;
   }
 
   .details {
     padding: 1.5rem;
-  }
-
-  .avatar {
-    width: 100px;
-    height: 100px;
-  }
-
-  .userName {
-    font-size: 1.5rem;
-  }
-
-  .formGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .buttonGroup {
-    justify-content: center;
+    max-width: 100%;
   }
 }
 
-@media (max-width: 480px) {
-  .details {
-    padding: 1rem;
-  }
+/* ========================
+   Added Touch & Light Effects
+   ======================== */
 
-  .avatar {
-    width: 80px;
-    height: 80px;
-  }
+/* Touching effect for buttons */
+button,
+.dialogButton {
+  position: relative;
+  overflow: hidden;
+}
 
-  .userName {
-    font-size: 1.3rem;
+button::after,
+.dialogButton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-20deg);
+  transition: left 0.4s;
+  pointer-events: none;
+  border-radius: 6px;
+}
+
+button:hover::after,
+.dialogButton:hover::after {
+  left: 100%;
+}
+
+/* Moving light background effect */
+@keyframes moveLight {
+  0% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.container {
+  background: linear-gradient(120deg, #f3fef3, #eaf7ea, #f3fef3);
+  background-size: 200% 200%;
+  animation: moveLight 6s ease infinite;
 }
