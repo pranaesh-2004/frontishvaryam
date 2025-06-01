@@ -5,6 +5,10 @@ import { useLoading } from './hooks/useLoading';
 import { setLoadingInterceptor } from './interceptors/loadingInterceptor';
 import { useEffect } from 'react';
 
+
+
+
+
 function App() {
   const { showLoading, hideLoading } = useLoading();
 
@@ -17,6 +21,7 @@ function App() {
       <Loading />
       <Header />
       <AppRoutes />
+      
     </>
   );
 }

@@ -28,6 +28,8 @@ export default function AppRoutes() {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/tag/:tagName" element={<HomePage />} /> {/* <-- ADD this */}
       <Route
         path="/checkout"
         element={

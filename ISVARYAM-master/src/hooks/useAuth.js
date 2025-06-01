@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async data => {
+  const register = async (data) => {
     try {
       const user = await userService.register(data);
       setUser(user);
@@ -33,13 +33,19 @@ export const AuthProvider = ({ children }) => {
     toast.success('Logout Successful');
   };
 
-  const updateProfile = async user => {
-    const updatedUser = await userService.updateProfile(user);
-    toast.success('Profile Update Was Successful');
-    if (updatedUser) setUser(updatedUser);
+  const updateProfile = async (userData) => {
+    try {
+      const updatedUser = await userService.updateProfile(userData);
+      if (updatedUser) setUser(updatedUser);
+      toast.success('Profile Update Was Successful');
+      return updatedUser; // So calling code can also access it
+    } catch (err) {
+      toast.error(err.response?.data || 'Profile update failed');
+      throw err;
+    }
   };
 
-  const changePassword = async passwords => {
+  const changePassword = async (passwords) => {
     await userService.changePassword(passwords);
     logout();
     toast.success('Password Changed Successfully, Please Login Again!');
@@ -47,7 +53,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, login, logout, register, updateProfile, changePassword }}
+      value={{
+        user,
+        setUser, // ✅ Added so components like ProfilePage can access this
+        login,
+        logout,
+        register,
+        updateProfile,
+        changePassword,
+      }}
     >
       {children}
     </AuthContext.Provider>

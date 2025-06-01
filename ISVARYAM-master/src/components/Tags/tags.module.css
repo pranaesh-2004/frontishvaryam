@@ -1,13 +1,21 @@
 .container {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.container a {
-  background-color: #f0f0f0;
-  padding: 0.3rem 1rem;
-  margin: 0.2rem 0.15rem;
-  border-radius: 10rem;
-  font-weight: 600;
-  color: blue;
+.tagButton {
+  background-color: #222;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tagButton:hover {
+  background-color: #444;
 }

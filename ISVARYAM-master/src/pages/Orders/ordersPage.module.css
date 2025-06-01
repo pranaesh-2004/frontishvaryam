@@ -2,248 +2,304 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
-  min-height: 80vh;
+  font-family: 'Amazon Ember', Arial, sans-serif;
 }
 
 .filter_tabs {
   display: flex;
   gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
   overflow-x: auto;
-  padding: 0.5rem 0;
-  margin-bottom: 2rem;
-  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
 .filter_tabs::-webkit-scrollbar {
-  display: none;
+  display: none; /* Hide scrollbar for Chrome/Safari */
 }
 
 .tab {
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  background-color: #f5f5f5;
-  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background-color: #f0f2f2;
+  color: #111;
   text-decoration: none;
+  transition: background-color 0.2s;
   font-weight: 500;
+  font-size: 0.9rem;
   white-space: nowrap;
-  transition: all 0.2s ease;
-  border: 1px solid #e0e0e0;
 }
 
 .tab:hover {
-  background-color: #e0e0e0;
-  transform: translateY(-2px);
+  background-color: #d5d9d9;
 }
 
-.tab.active {
-  background-color: #ff6b6b;
+.active {
+  background-color: #232f3e;
   color: white;
-  border-color: #ff6b6b;
 }
 
 .orders_list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .order_card {
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  padding: 1rem;
   background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-  border: 1px solid #eee;
 }
 
 .order_card:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .order_header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem;
   cursor: pointer;
-  flex-wrap: wrap;
-  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+@media (min-width: 768px) {
+  .order_header {
+    grid-template-columns: 2fr 1fr 2fr 2fr 40px;
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+  }
 }
 
 .order_id {
-  font-weight: 600;
-  color: #333;
-  flex: 1;
-  min-width: 120px;
+  font-weight: bold;
+  color: #111;
+  font-size: 0.95rem;
 }
 
 .order_status {
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-weight: 500;
   font-size: 0.9rem;
-  text-transform: capitalize;
-}
-
-.order_status[data-status="pending"] {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.order_status[data-status="completed"] {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.order_status[data-status="cancelled"] {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-.order_status[data-status="processing"] {
-  background-color: #cce5ff;
-  color: #004085;
-}
-
-.order_date {
-  color: #666;
-  font-size: 0.9rem;
-  min-width: 150px;
-}
-
-.order_total {
   font-weight: 600;
-  color: #222;
-  min-width: 100px;
+  color: #007600;
+  text-transform: capitalize;
+  justify-self: end;
+}
+
+@media (min-width: 768px) {
+  .order_status {
+    justify-self: start;
+    font-size: 0.95rem;
+  }
+}
+
+.order_date,
+.order_total {
+  font-size: 0.9rem;
+  color: #555;
+  grid-column: span 2;
+}
+
+@media (min-width: 768px) {
+  .order_date,
+  .order_total {
+    grid-column: auto;
+    font-size: 0.95rem;
+  }
 }
 
 .expand_icon {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  text-align: center;
   font-weight: bold;
-  color: #666;
-  transition: transform 0.3s ease;
+  color: #555;
+  grid-column: 2;
+  grid-row: 1;
 }
 
-.order_card.expanded .expand_icon {
-  transform: rotate(180deg);
+@media (min-width: 768px) {
+  .expand_icon {
+    grid-column: auto;
+    grid-row: auto;
+    font-size: 1.5rem;
+  }
 }
 
 .order_details {
-  padding: 0 1.5rem 1.5rem;
-  border-top: 1px solid #eee;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  margin-top: 1rem;
 }
 
 .items_grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin: 1.5rem 0;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.8rem;
+}
+
+@media (min-width: 480px) {
+  .items_grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
 }
 
 .item_card {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.5rem;
   text-decoration: none;
   color: inherit;
-  padding: 0.75rem;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  border: 1px solid #f0f0f0;
+  background-color: #f9f9f9;
+  transition: transform 0.2s ease;
 }
 
 .item_card:hover {
-  background-color: #f9f9f9;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transform: scale(1.02);
 }
 
 .item_image {
   width: 60px;
   height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
+  object-fit: contain;
+  margin-right: 0.6rem;
+}
+
+@media (min-width: 480px) {
+  .item_image {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .item_info {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
 }
 
 .item_name {
   font-weight: 500;
-  margin-bottom: 0.25rem;
-  color: #333;
+  font-size: 0.9rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.item_quantity {
-  font-size: 0.8rem;
-  color: #666;
+@media (min-width: 480px) {
+  .item_name {
+    font-size: 1rem;
+  }
 }
 
+.item_quantity,
 .item_price {
-  font-weight: 600;
-  color: #ff6b6b;
-  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+@media (min-width: 480px) {
+  .item_quantity,
+  .item_price {
+    font-size: 0.9rem;
+  }
 }
 
 .order_actions {
+  margin-top: 1rem;
   display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: 0.8rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
-.track_button, .reorder_button {
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.order_actions::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+.track_button,
+.reorder_button {
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
   border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
   font-size: 0.9rem;
+  min-width: 140px;
+  text-align: center;
+  white-space: nowrap;
+  flex: 0 0 auto; /* Prevent buttons from shrinking */
 }
 
 .track_button {
-  background-color: #ff6b6b;
-  color: white;
-  text-decoration: none;
+  background-color: #ffd814;
+  color: #111;
 }
 
 .track_button:hover {
-  background-color: #ff5252;
-  transform: translateY(-2px);
+  background-color: #f7ca00;
 }
 
 .reorder_button {
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: #e7e9ec;
+  color: #111;
 }
 
 .reorder_button:hover {
-  background-color: #e0e0e0;
-  transform: translateY(-2px);
+  background-color: #d5d9d9;
 }
 
-@media (max-width: 768px) {
-  .order_header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
+/* Additional button styles for more actions */
+.view_button {
+  background-color: #f0f2f2;
+  color: #111;
+}
+
+.view_button:hover {
+  background-color: #d5d9d9;
+}
+
+.return_button {
+  background-color: #f0f2f2;
+  color: #111;
+}
+
+.return_button:hover {
+  background-color: #d5d9d9;
+}
+
+/* Responsive adjustments */
+@media (min-width: 480px) {
+  .track_button,
+  .reorder_button,
+  .view_button,
+  .return_button {
+    padding: 0.5rem 1rem;
   }
-  
-  .items_grid {
-    grid-template-columns: 1fr;
-  }
-  
+}
+
+@media (min-width: 768px) {
   .order_actions {
-    justify-content: center;
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+  
+  .track_button,
+  .reorder_button,
+  .view_button,
+  .return_button {
+    min-width: auto;
+    flex: none;
   }
 }

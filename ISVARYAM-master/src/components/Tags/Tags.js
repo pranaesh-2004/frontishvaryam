@@ -1,21 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import classes from './tags.module.css';
+import { useNavigate } from 'react-router-dom';
 
-export default function Tags({ tags, forFoodPage }) {
+export default function Tags({ tags }) {
+  const navigate = useNavigate();
+
   return (
-    <div
-      className={classes.container}
-      style={{
-        justifyContent: forFoodPage ? 'start' : 'center',
-      }}
+    <select
+      className="form-select"
+      onChange={(e) => navigate(`/tag/${e.target.value}`)}
     >
-      {tags.map(tag => (
-        <Link key={tag.name} to={`/tag/${tag.name}`}>
-          {tag.name}
-          {!forFoodPage && `(${tag.count})`}
-        </Link>
+      {tags.map((tag, index) => (
+        <option key={index} value={tag.name}>
+          {tag.name} ({tag.count})
+        </option>
       ))}
-    </div>
+    </select>
   );
 }
