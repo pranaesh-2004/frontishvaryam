@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../hooks/useAuth';
 import classes from './profilePage.module.css';
@@ -6,118 +6,80 @@ import Title from '../../components/Title/Title';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import ChangePassword from '../../components/ChangePassword/ChangePassword';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import LoadingSpinner from '../../components/Loading/Loading';
+import { FaUser, FaMapMarkerAlt, FaUserEdit, FaQuestionCircle } from 'react-icons/fa';
 
 export default function ProfilePage() {
   const {
     handleSubmit,
     register,
-    formState: { errors, isDirty },
-    reset,
+    formState: { errors },
   } = useForm();
 
-  const { user, updateProfile, isLoading } = useAuth();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { user, updateProfile } = useAuth();
+  const [showPasswordDialog, setShowPasswordDialog] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      const defaultValues = {
-        name: user.name,
-        email: user.email,
-        address: user.address,
-      };
-      reset(defaultValues);
-    }
-  }, [user, reset]);
-
-  const submit = async (data) => {
-    setIsSubmitting(true);
-    try {
-      const updatedUser = await updateProfile(data);
-      if (updatedUser) {
-        reset({
-          name: updatedUser.name,
-          email: updatedUser.email,
-          address: updatedUser.address,
-        });
-        toast.success('Profile updated successfully!');
-      }
-    } catch (error) {
-      toast.error(error.message || 'Failed to update profile');
-    } finally {
-      setIsSubmitting(false);
-    }
+  const submit = user => {
+    updateProfile(user);
   };
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <div className={classes.container}>
-      <div className={classes.details}>
-        <Title title="My Profile" />
-        <h2 className={classes.userName}>{user?.name}</h2>
+      {/* Sidebar */}
+      <aside className={classes.sidebar}>
+        <div className={classes.card}>
+          <FaUser size={48} className={classes.avatar} />
+          <h3>{user.name}</h3>
+          <p><FaMapMarkerAlt size={12} /> {user.address}</p>
+        </div>
+      </aside>
 
-        <form onSubmit={handleSubmit(submit)} className={classes.profileForm}>
-          <div className={classes.formGrid}>
-            <Input
-              type="text"
-              label="Full Name"
-              {...register('name', {
-                required: 'Name is required',
-                minLength: {
-                  value: 3,
-                  message: 'Name must be at least 3 characters',
-                },
-              })}
-              error={errors.name}
-              disabled={isSubmitting}
-            />
+      {/* Main form */}
+      <main className={classes.details}>
+        <div className={classes.titleRow}>
+          <Title title="Update Profile" />
+          <FaUserEdit className={classes.editIcon} />
+        </div>
 
-            <Input
-              type="email"
-              label="Email"
-              {...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address',
-                },
-              })}
-              error={errors.email}
-              disabled
-            />
-
-            <Input
-              type="text"
-              label="Address"
-              {...register('address', {
-                required: 'Address is required',
-                minLength: {
-                  value: 10,
-                  message: 'Address must be at least 10 characters',
-                },
-              })}
-              error={errors.address}
-              disabled={isSubmitting}
-            />
-          </div>
-
-          <div className={classes.buttonGroup}>
-            <Button
-              type="submit"
-              text={isSubmitting ? 'Updating...' : 'Update Profile'}
-              backgroundColor="#009e84"
-              disabled={!isDirty || isSubmitting}
-            />
-          </div>
+        <form onSubmit={handleSubmit(submit)}>
+          <Input
+            defaultValue={user.name}
+            type="text"
+            label="Name"
+            {...register('name', { required: true, minLength: 5 })}
+            error={errors.name}
+          />
+          <Input
+            defaultValue={user.address}
+            type="text"
+            label="Address"
+            {...register('address', { required: true, minLength: 10 })}
+            error={errors.address}
+          />
+          <Button type="submit" text="Save Changes" size="small" backgroundColor="#009e84" />
         </form>
 
-        <ChangePassword />
-      </div>
+        {/* Change Password Trigger Button */}
+        <button
+          type="button"
+          className={classes.changePasswordBtn}
+          onClick={() => setShowPasswordDialog(true)}
+        >
+          <FaQuestionCircle /> Change Password?
+        </button>
+
+        {/* Password Dialog */}
+        {showPasswordDialog && (
+          <div className={classes.dialogOverlay}>
+            <div className={classes.dialogBox}>
+              <div className={classes.dialogHeader}>
+                <h3></h3>
+                <button onClick={() => setShowPasswordDialog(false)}>&times;</button>
+              </div>
+              <ChangePassword />
+            </div>
+          </div>
+        )}
+      </main>
     </div>
   );
 }
